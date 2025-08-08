@@ -260,6 +260,7 @@ let proyects=gsap.utils.toArray(".proyects");
   { text: "Estilo", font: "Lobster, cursive" },
   { text: "Innovación", font: "Monoton, cursive" },
   { text: "Magia", font: "Bungee Shade, cursive" }
+
 ];
 
 
@@ -315,3 +316,72 @@ async function write_split(elemento, texto_write){
 await new Promise(resolve => setTimeout(resolve, 300));
   }
 }
+
+function setupScrollAnimations() {
+  const createScrollAnimation = (trigger, elements, vars) => {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: trigger,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+    timeline.from(elements, { ...vars });
+  };
+
+  // Animación para .navbar
+  createScrollAnimation(".section_2", ".navbar", {
+    opacity: 0,
+    y: -50,
+    duration: 1,
+    ease: "power3.out",
+  });
+
+  // Animación para la sección de aplicaciones móviles
+  createScrollAnimation(".mobile_apps_header", ".mobile_apps_header h2, .mobile_apps_header p", {
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out",
+  });
+
+  createScrollAnimation(".mobile_apps_content", ".mobile_text h3, .mobile_text p", {
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    stagger: 0.2,
+    delay: 0.3,
+    ease: "power3.out",
+  });
+
+  createScrollAnimation(".mobile_features", ".feature", {
+    opacity: 0,
+    scale: 0.5,
+    y: 50,
+    duration: 0.5,
+    stagger: 0.15,
+    delay: 0.5,
+    ease: "back.out(1.7)",
+  });
+
+  // Animación para la sección de contacto
+  createScrollAnimation(".contact_section", {
+    opacity: 0,
+    x: -100,
+    duration: 1,
+    ease: "power3.out",
+  });
+
+  createScrollAnimation(".contact_section", ".contact_form", {
+    opacity: 0,
+    x: 100,
+    duration: 1,
+    ease: "power3.out",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupScrollAnimations();
+});
